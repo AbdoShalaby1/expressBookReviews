@@ -47,7 +47,7 @@ regd_users.put("/auth/review/:isbn", (req, res) => {
     return res.status(404).send("no review supplied");
   }
   if (id && req.query.review) {
-    books[id]["reviews"][req.session.user] = req.query.review;
+    books[id]["reviews"][req.session.auth.user] = req.query.review;
     return res.status(200).send("review added");
   }
 });
@@ -55,7 +55,7 @@ regd_users.put("/auth/review/:isbn", (req, res) => {
 // Delete a book review
 regd_users.delete("/auth/review/:isbn", (req, res) => {
   if (req.params.isbn) {
-    delete books[req.params.isbn]["reviews"][req.session.user];
+    delete books[req.params.isbn]["reviews"][req.session.auth.user];
     return res.status(200).send("deleted successfully");
   }
   return res.status(404).send("No ID provided");

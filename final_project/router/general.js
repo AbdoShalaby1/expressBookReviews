@@ -13,7 +13,7 @@ public_users.post("/register", (req, res) => {
     return res.status(404).send("Incomplete Data");
   }
 
-  if (!isValid(username)) {
+  if (isValid(username)) {
     return res.status(404).send("User already exists");
   }
 
